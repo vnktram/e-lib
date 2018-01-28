@@ -14,9 +14,9 @@
 		<title>NIT-Py Library</title>
 	</head>
 	<body>
-		
-	
-		
+
+
+
 			<div class="container">
         <div class="row">
             <div class="col-md-11 ">
@@ -34,25 +34,25 @@
   <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
   <input class="form-control" name="rollno" type="text" placeholder="Roll Number">
 </div>
-      
+
                                 <br>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <INPUT class="btn btn-outline btn-info btn-lg  btn-block" TYPE='submit' Value="Submit" NAME='sub1'>
                             </fieldset>
                         </form>
                         </div>
-                       
-                   
-	
+
+
+
 			<?php
 				/* Here you hav to set $rollno as rollno of student obtained from the input */
 				if(isset($_POST['rollno']))
 				{
-					
-					
-				
-					
-						$rows=0;				
+
+
+
+
+						$rows=0;
 					$db = new PDO('mysql:host=localhost;dbname=library;', 'root', '');
 					$q=$db->query(' SELECT * FROM transactions WHERE u_id IN(SELECT u_id FROM users WHERE rollno="'.$_POST['rollno'].'")' );
 					$r = $q->fetchAll();
@@ -63,29 +63,29 @@
 						echo "
 					<div class='col-md-8 table-responsive'>
 					<h3> Details of ".$_POST['rollno']."</h3>
-					
+
                                 <table class='table table-bordered table-hover'>
                                     <thead>
                                         <tr>
                                             <th>Book No.</th>
 						<th>Date Borrowed</th>
 						<th>Return Date</th>
-						<th>Status</th>
+						<th>Current Status</th>
                                         </tr>
                                     </thead>
-                               
-                             
-						
+
+
+
 						";
 						$q=$db->query(' SELECT * FROM transactions WHERE u_id IN(SELECT u_id FROM users WHERE rollno="'.$_POST['rollno'].'")' );
-					foreach($q as $r) 
+					foreach($q as $r)
 						{
 							if($r['status']=="0")
 							{
 								$stat="UN-Returned";
 								echo "<tr><td>".$r['book_token']."</td><td>".$r['borrowtime']."</td> <td>".$r['returntime']."</td><td>".$stat."</td></tr>";
 							}
-							
+
 						}
 						echo " </table>
                             </div> ";
@@ -100,19 +100,17 @@
                             </div>
                             </div>";
 					}
-					
-				}	
+
+				}
 				?>
-				           
+
                                            </div>
-            
+
         </div>
     </div>
 	</div>
 	</div>
-	</div>		  
-     	
+	</div>
+
 	</body>
 </html>
-
-
